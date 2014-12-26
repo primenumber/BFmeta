@@ -11,13 +11,13 @@ if ARGV.include?("--debug") then
   loop {
     break unless state.step
     $dw.output(state)
-    sleep(0.1)
+    #sleep(0.01)
   }
   Curses::getch
   Curses::close_screen
   puts output.output
 else
-  input =  if ARGV[1] != nil then File.open(ARGV[1], "r").each_byte else $stdin end
+  input =  if ARGV[1] != nil then File.open(ARGV[1], "r").each_byte else $stdin.each_byte end
   output = if ARGV[2] != nil then File.open(ARGV[2], "wb") else $stdout end
   state = BFMState.new(file.read, input, output)
   loop {
