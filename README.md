@@ -20,5 +20,5 @@ $ bundle exec ruby bfmeta.rb source.bfm
 ## debug
 
 ```
-$ bundle exec ruby bfmeta.rb source.bfm input.txt --debug
+$ bundle exec ruby bfmeta.rb source.bfm input.txt output.txt --debug
 ```
