@@ -2,8 +2,8 @@ class BFMState
   attr_reader :ary, :data_pos, :prog_pos
   @@code = "><+-[],.\0"
   def initialize(code, input=$stdin.each_byte, output=$stdout)
-    @ary = Array.new
-    code.each_byte {|ch| @ary.push(ch)}
+    @ary = Hash.new("\0")
+    code.each_byte.with_index {|ch,i| @ary[i] = ch}
     @data_pos = 0
     @prog_pos = 0
     @input_enum = input
@@ -13,7 +13,7 @@ class BFMState
     cnt = -1
     while cnt != 0
       @prog_pos -= 1
-      raise "Unmatch brackets" if @prog_pos < 0
+      raise "Unmatch brackets" if !@ary.has_key?(@prog_pos)
       case @ary[@prog_pos].chr
       when @@code[4] then
         cnt += 1
@@ -26,7 +26,7 @@ class BFMState
     cnt = 1
     while cnt != 0
       @prog_pos += 1
-      @ary[@prog_pos] = 0 if @ary[@prog_pos] == nil
+      raise "Unmatch brackets" if !@ary.has_key?(@prog_pos)
       case @ary[@prog_pos].chr
       when @@code[4] then
         cnt += 1
@@ -39,10 +39,10 @@ class BFMState
     case @ary[@prog_pos].chr
     when @@code[0] then
       @data_pos += 1
-      @ary[@data_pos] = 0 if @ary[@data_pos] == nil
+      @ary[@data_pos] = 0 if !@ary.has_key?(@data_pos)
     when @@code[1] then
       @data_pos -= 1
-      raise "Out of Array" if @data_pos < 0
+      @ary[@data_pos] = 0 if !@ary.has_key?(@data_pos)
     when @@code[2] then
       if @ary[@data_pos] < 255 then
         @ary[@data_pos] += 1
@@ -71,7 +71,7 @@ class BFMState
       return false
     end
     @prog_pos += 1
-    @ary[@prog_pos] = 0 if @ary[@prog_pos] == nil
+    @ary[@prog_pos] = 0 if !@ary.has_key?(@prog_pos)
     return true
   end
 end
