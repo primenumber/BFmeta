@@ -68,7 +68,7 @@ class ProgramWindow
     size_char = @char_win.maxx * @char_win.maxy
     @char_win.setpos(0, 0)
     size_char.times do |i|
-      byte = state.ary[i]
+      byte = state.ary[i].ord
       @char_win.attron(Curses::A_BOLD) if i == state.prog_pos
       @char_win.attron(Curses::A_REVERSE) if i == state.data_pos
       if byte != nil && 32 <= byte && byte <= 126 then
@@ -90,7 +90,7 @@ class ProgramWindow
       if i != 0 && (i % (@hex_win.maxx / 2)) == 0
         @hex_win.setpos(@hex_win.cury + 1, 0)
       end
-      byte = if state.ary[i] != nil then state.ary[i] else 0 end
+      byte = if state.ary[i] != nil then state.ary[i].ord else 0 end
       @hex_win.attron(Curses::A_BOLD) if i == state.prog_pos
       @hex_win.attron(Curses::A_REVERSE) if i == state.data_pos
       @hex_win.addstr("%02X" % byte)
