@@ -13,6 +13,7 @@ if ARGV.include?("--debug") then
     $dw.output(state)
     #sleep(0.01)
   }
+  $dw.output(state)
   Curses::getch
   Curses::close_screen
   puts output.output
