@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang='ja'>
+<head>
+  <meta charset='utf-8'>
+  <title>BFmetaのページ</title>
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+</head>
+<body>
+  <header>
+    <h1>BFmetaのページ</h1>
+    <p>Brainf*ckのシンプルさを失わずにリフレクションを可能にしたBrainf*ckの拡張、BFmetaの公式ページです。</p>
+  </header>
+  <h2>Brainf*ckとの違い</h2>
+  <p>配列の最初にソースコードが埋め込まれ、配列の値を書き換えることで命令を動的に書き換えることができるようになっています。<br>
+  また、プログラムの終了条件がヌル文字に到達することに変更されています。</p>
+  <h2>言語仕様</h2>
+  <p>最初に無限長の符号なし1byte整数型の配列の先頭にソースコードが読み込まれる。<br>
+  配列はソースコードが終わったあとはすべて0で初期化される。</p>
+  <p>各命令は1byteから成る。<br>
+  Brainf*ckに存在する命令の意味はBrainf*ckと同じ。<br>
+  各命令が実行されたあと、プログラムポインタはひとつ進められる。</p>
+  <dl>
+    <dt><pre class='inline_code'><code>+</code></pre> :</dt>
+    <dd>データポインタの指す値を1増やす</dd>
+    <dt><pre class='inline_code'><code>-</code></pre> :</dt>
+    <dd>データポインタの指す値を1減らす</dd>
+    <dt><pre class='inline_code'><code>&gt;</code></pre> :</dt>
+    <dd>データポインタをインクリメントする</dd>
+    <dt><pre class='inline_code'><code>&lt;</code></pre> :</dt>
+    <dd>データポインタをデクリメントする</dd>
+    <dt><pre class='inline_code'><code>[</code></pre> :</dt>
+    <dd>もしデータポインタの指す値が0なら、プログラムポインタを対応する]にセットする</dd>
+    <dt><pre class='inline_code'><code>]</code></pre> :</dt>
+    <dd>もしデータポインタの指す値が0でないならプログラムポインタを対応する[にセットする</dd>
+    <dt><pre class='inline_code'><code>.</code></pre> :</dt>
+    <dd>データポインタの指す値を文字として標準出力に出力する</dd>
+    <dt><pre class='inline_code'><code>,</code></pre> :</dt>
+    <dd>標準入力から1バイト読み込み、データポインタの指す場所に代入する</dd>
+    <dt><pre class='inline_code'><code>\0</code></pre>(ヌル文字) :</dt>
+    <dd>プログラムを終了する</dd>
+    <dt>それ以外 :</dt>
+    <dd>何もしない</dd>
+  </dl>
+  <h2>サンプル</h2>
+  <p>Hello World!</p>
+  <pre><code>[&gt;]&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;[.&gt;]Hello World!</code></pre>
+  <h2>処理系の入手</h2>
+  <h3>Rubyによるインタプリタ</h3>
+  <a href='https://github.com/primenumber/BFmeta'>primenumber/BFmeta | GitHub</a>
+  <h3>C++によるインタプリタ</h3>
+  <a href='https://github.com/primenumber/bfmi-cpp'>primenumber/bfmi-cpp | GitHub</a>
+</body>
+</html>
