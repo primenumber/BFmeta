@@ -10,7 +10,7 @@ Brainf\*ckでリフレクションができるようにしたプログラミン�
 ```
 $ git clone https://github.com/primenumber/BFmeta.git
 $ cd BFmeta
-$ bundle install --path vendor/bundle
+$ bundle install
 ```
 
 ## run
