@@ -6,6 +6,8 @@ class BFMState
     code.each_byte.with_index {|ch,i| @ary[i] = ch}
     @data_pos = 0
     @prog_pos = 0
+    @visited_min = 0
+    @visited_max = code.bytes.length - 1
     @input_enum = input
     @output = output
   end
@@ -13,7 +15,7 @@ class BFMState
     cnt = -1
     while cnt != 0
       @prog_pos -= 1
-      raise "Unmatch brackets" if !@ary.has_key?(@prog_pos)
+      raise "Unmatch brackets" if @prog_pos < @visited_min
       case @ary[@prog_pos]
       when INSTS[4] then
         cnt += 1
@@ -26,7 +28,7 @@ class BFMState
     cnt = 1
     while cnt != 0
       @prog_pos += 1
-      raise "Unmatch brackets" if !@ary.has_key?(@prog_pos)
+      raise "Unmatch brackets" if @prog_pos > @visited_max
       case @ary[@prog_pos]
       when INSTS[4] then
         cnt += 1
@@ -71,6 +73,8 @@ class BFMState
       return false
     end
     @prog_pos += 1
+    @visited_min = [@visited_min, @data_pos].min
+    @visited_max = [@visited_max, @data_pos].max
     return true
   end
 end
