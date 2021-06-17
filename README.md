@@ -1,7 +1,9 @@
 BFmeta
 ======
 
-Brainf*ckでリフレクションができるようにしたプログラミング言語BFmetaのインタプリタ・デバッガ
+Brainf\*ckでリフレクションができるようにしたプログラミング言語BFmetaのインタプリタ・デバッガ
+
+高速なインタプリタの実装: [bfmi-cpp](https://github.com/primenumber/bfmi-cpp)
 
 ## install
 
